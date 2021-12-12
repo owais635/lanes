@@ -39,6 +39,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("I hit" + collider.gameObject.name);
+        if (collider.tag == ENEMY_TAG)
+        {
+            GameManager.isGameOver = true;
+            gameObject.SetActive(false);
+        }
     }
 }
