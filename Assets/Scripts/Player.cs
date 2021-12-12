@@ -7,8 +7,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D myRigidBody;
 
     // private float speed = 5;
-
     public float moveForce = 5f;
+
+    private const string ENEMY_TAG = "Enemy";
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +35,10 @@ public class Player : MonoBehaviour
         // move player upwards
         // myRigidBody.AddForce(new Vector2(0, speed));
         // myRigidBody.velocity = new  Vector2(0, speed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("I hit" + collider.gameObject.name);
     }
 }
