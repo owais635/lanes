@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigidBody;
 
-    private float speed = 5;
+    // private float speed = 5;
 
     public float moveForce = 5f;
 

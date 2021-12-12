@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 20f;
 
     // Start is called before the first frame update
     void Start()
