@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         // move player upwards
-        myRigidBody.AddForce(new Vector2(0, speed));
+        // myRigidBody.AddForce(new Vector2(0, speed));
         // myRigidBody.velocity = new  Vector2(0, speed);
     }
 }
