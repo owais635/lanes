@@ -6,9 +6,6 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D myRigidBody;
 
-    // private float speed = 5;
-    public float moveForce = 5f;
-
     private const string ENEMY_TAG = "Enemy";
 
     // Lerp Variables
@@ -20,7 +17,7 @@ public class Player : MonoBehaviour
 
     private float lerpTime;
 
-    private const float lerpSpeed = 5;
+    private const float lerpSpeed = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +38,6 @@ public class Player : MonoBehaviour
         // Start Lerp towards Right and wait for lerp to complete
         if (Input.GetKeyDown(KeyCode.RightArrow) && !shouldLerp)
         {
-            Debug.Log("Move Right >");
-
             shouldLerp = true;
             lerpDirection = 1;
             lerpTime = 0;
@@ -50,15 +45,13 @@ public class Player : MonoBehaviour
         } // Start Lerp towards Left
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !shouldLerp)
         {
-            Debug.Log("Move Left <");
-
             shouldLerp = true;
             lerpDirection = -1;
             lerpTime = 0;
             lerpStartX = transform.position.x;
         }
 
-        if (shouldLerp && lerpTime < 1f)
+        if (shouldLerp && lerpTime <= 1f)
         {
             Vector3 start =
                 new Vector3(lerpStartX,
@@ -68,21 +61,21 @@ public class Player : MonoBehaviour
             Vector3 end = start + new Vector3(2 * lerpDirection, 0, 0);
 
             transform.position = Vector3.Lerp(start, end, lerpTime);
+
             lerpTime += Time.deltaTime * lerpSpeed;
         }
-        else if (shouldLerp && lerpTime >= 1f)
+        else if (shouldLerp && lerpTime > 1f)
         {
+            // Round x component to set x coordinate be exactly -2, or 0, or 2.
+            transform.position =
+                new Vector3(Mathf.RoundToInt(currentPos.x),
+                    currentPos.y,
+                    currentPos.z);
+
             // lerp is complete, so reset variables
             shouldLerp = false;
             lerpTime = 0;
         }
-    }
-
-    void FixedUpdate()
-    {
-        // move player upwards
-        // myRigidBody.AddForce(new Vector2(0, speed));
-        // myRigidBody.velocity = new  Vector2(0, speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
